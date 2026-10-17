@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>回転ジグソー</title>
+  <link rel="stylesheet" href="jigsaw.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <p class="timer" id="timer">0:00.0</p>
+      <h1>回転ジグソー</h1>
+      <p class="lede">ドラッグで動かす。クリックで90度回す。</p>
+      <div class="toolbar">
+        <button type="button" id="restart" class="restart" disabled>もう一度</button>
+        <a class="back" href="./">帯そろえにもどる</a>
+      </div>
+    </header>
+    <p id="message" class="message" hidden></p>
+    <div class="play" id="play">
+      <canvas id="board" width="640" height="800" aria-label="回転ジグソーの盤面"></canvas>
+      <div id="clear" class="clear" hidden>できた</div>
+    </div>
+  </div>
+  <script src="jigsaw.js"></script>
+</body>
+</html>

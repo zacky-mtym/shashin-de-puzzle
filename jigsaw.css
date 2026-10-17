@@ -1,0 +1,143 @@
+:root {
+  --bg: #efe6d9;
+  --ink: #2c241d;
+  --muted: #6d6258;
+  --accent: #9c3b2e;
+  --paper: #fffaf3;
+  --line: #d9cbb8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 50% -8%, #fffaf3, transparent 70%),
+    var(--bg);
+  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 16px 28px;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.lede {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.timer {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.timer.is-stopped {
+  color: var(--accent);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.restart {
+  min-height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fffaf3;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.restart:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.back {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.restart:focus-visible,
+.back:focus-visible {
+  outline: 2px solid #c9842a;
+  outline-offset: 2px;
+}
+
+.message {
+  margin: 12px 0 0;
+  color: var(--accent);
+}
+
+.play {
+  position: relative;
+  margin-top: 14px;
+  max-width: 100%;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+  border-radius: 12px;
+  touch-action: none;
+  cursor: grab;
+  box-shadow: 0 14px 36px rgba(55, 32, 16, 0.16);
+}
+
+canvas.is-dragging {
+  cursor: grabbing;
+}
+
+.clear {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4%;
+  background: linear-gradient(to top, rgba(24, 14, 10, 0.78), rgba(24, 14, 10, 0));
+  color: #fffaf3;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  pointer-events: none;
+}
+
+.clear[hidden] {
+  display: none;
+}

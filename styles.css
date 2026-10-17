@@ -55,6 +55,15 @@ h1 {
   text-wrap: balance;
 }
 
+.switch {
+  margin: 8px 0 0;
+}
+
+.switch a {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .timer {
   margin: 0 0 8px;
   font-size: 2rem;
