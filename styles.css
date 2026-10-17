@@ -83,6 +83,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .photo-field[hidden] {
