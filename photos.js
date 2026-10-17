@@ -2,4 +2,5 @@
 // 例: { src: "omatsuri.jpg", title: "写真2" },
 window.PHOTOS = [
   { src: "photo01tsukuru.jpg", title: "写真1" },
+  { src: "photo02ohzu.jpg", title: "写真2" },
 ];
