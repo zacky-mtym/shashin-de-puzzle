@@ -1,7 +1,6 @@
 (() => {
   const COLS = 6;
   const ROWS = 4;
-  const PREVIEW_MS = 3000;
 
   const canvas = document.getElementById("board");
   const ctx = canvas.getContext("2d");
@@ -24,9 +23,7 @@
   let pad = 1;
   let cssW = 640;
   let cssH = 800;
-  let previewing = false;
   let solved = false;
-  let previewTimer = 0;
   let spinId = 0;
   let spinning = false;
   let drag = null;
@@ -319,7 +316,7 @@
     ctx.fillStyle = "#f7f1e8";
     ctx.fillRect(0, 0, cssW, cssH);
     drawBoard();
-    if (previewing || solved) {
+    if (solved) {
       ctx.save();
       ctx.beginPath();
       ctx.roundRect(boardX, boardY, boardW, boardH, 8);
@@ -391,7 +388,7 @@
   }
 
   function finishIfSolved() {
-    if (previewing || solved || spinning) return;
+    if (solved || spinning) return;
     if (allLocked()) beginClear();
   }
 
@@ -428,7 +425,7 @@
   }
 
   function onDown(event) {
-    if (previewing || solved || spinning) return;
+    if (solved || spinning) return;
     const point = pointOf(event);
     const piece = topPieceAt(point.x, point.y);
     if (!piece) return;
@@ -475,7 +472,6 @@
   }
 
   function startRound() {
-    clearTimeout(previewTimer);
     if (spinId) cancelAnimationFrame(spinId);
     spinning = false;
     drag = null;
@@ -488,13 +484,8 @@
     makeTabs();
     buildBitmaps();
     scatter();
-    previewing = true;
+    startTimer();
     draw();
-    previewTimer = setTimeout(() => {
-      previewing = false;
-      startTimer();
-      draw();
-    }, PREVIEW_MS);
   }
 
   function onResize() {
