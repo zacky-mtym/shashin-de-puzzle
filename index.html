@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>写真deパズル</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>写真deパズル</h1>
+      <p class="lede">帯を左右にずらして、上下に入れ替え、1枚の写真にそろえる。</p>
+      <div class="toolbar">
+        <label class="photo-field" id="photo-field">
+          <span>写真</span>
+          <select id="photo"></select>
+        </label>
+        <button type="button" id="restart" class="restart" disabled>もう一度</button>
+      </div>
+    </header>
+
+    <p id="message" class="message" hidden></p>
+
+    <div class="stage" id="stage">
+      <div class="col">
+        <div class="col-head">入れ替え</div>
+        <div class="side" id="side-move"></div>
+      </div>
+      <div class="board-col" id="board-col">
+        <div class="col-head spacer" aria-hidden="true"></div>
+        <div class="board">
+          <canvas id="board" width="640" height="480" aria-label="パズルの盤面"></canvas>
+          <div id="clear" class="clear" hidden>できた</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-head">ずらす</div>
+        <div class="side" id="side-shift"></div>
+      </div>
+    </div>
+
+    <div class="mobile-controls" id="mobile-controls">
+      <button type="button" data-act="up" aria-label="選択中の帯を上と入れ替える">↑</button>
+      <button type="button" data-act="down" aria-label="選択中の帯を下と入れ替える">↓</button>
+      <button type="button" data-act="left" aria-label="選択中の帯を左へずらす">←</button>
+      <button type="button" data-act="right" aria-label="選択中の帯を右へずらす">→</button>
+    </div>
+
+    <p class="hint">帯をクリックして選ぶと、矢印キーでも動く。</p>
+  </div>
+  <script src="photos.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

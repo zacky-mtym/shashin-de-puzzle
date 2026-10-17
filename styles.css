@@ -1,0 +1,297 @@
+:root {
+  --bg: #efe6d9;
+  --ink: #2c241d;
+  --muted: #6d6258;
+  --accent: #9c3b2e;
+  --paper: #fffaf3;
+  --line: #d9cbb8;
+  --gold: #c9842a;
+  --gold-soft: #f4e2c4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 50% -8%, #fffaf3, transparent 70%),
+    var(--bg);
+  font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+button,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 16px 36px;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.lede,
+.hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+.hint {
+  font-size: 0.92rem;
+}
+
+.mobile-controls {
+  display: none;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.photo-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.photo-field[hidden] {
+  display: none;
+}
+
+select,
+.restart {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 0 14px;
+}
+
+.restart {
+  background: var(--accent);
+  color: #fffaf3;
+  border: none;
+  cursor: pointer;
+}
+
+.restart:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.restart:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.message {
+  margin: 14px 0 0;
+  color: var(--accent);
+}
+
+.stage {
+  width: min(1080px, 100%);
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  column-gap: 10px;
+  align-items: start;
+}
+
+.col-head {
+  height: 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+.col-head.spacer {
+  visibility: hidden;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+}
+
+.pair {
+  flex: 1 1 0;
+  display: flex;
+  gap: 4px;
+  min-height: 0;
+  padding: 1px 0;
+}
+
+.pair button {
+  flex: 1;
+  min-width: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.pair.is-selected button {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+}
+
+.pair button:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+
+.pair button:focus-visible,
+.mobile-controls button:focus-visible,
+.restart:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.pair button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.board {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(55, 32, 16, 0.16);
+  background: #2a211c;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.clear {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6%;
+  background: linear-gradient(to top, rgba(24, 14, 10, 0.78), rgba(24, 14, 10, 0));
+  color: #fffaf3;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  pointer-events: none;
+  animation: rise 0.45s ease;
+}
+
+.clear[hidden] {
+  display: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 18px 10px 24px;
+  }
+
+  h1 {
+    font-size: 1.35rem;
+  }
+
+  .pair button {
+    min-width: 36px;
+    font-size: 0.95rem;
+  }
+
+  .stage {
+    column-gap: 6px;
+  }
+}
+
+@media (max-width: 560px) {
+  .col {
+    display: none;
+  }
+
+  .board-col .col-head {
+    display: none;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-controls {
+    display: flex;
+    gap: 8px;
+    width: min(520px, 100%);
+    margin-top: 12px;
+  }
+
+  .mobile-controls button {
+    flex: 1;
+    min-height: 52px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper);
+    font-size: 1.35rem;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .mobile-controls button:disabled {
+    opacity: 0.32;
+    cursor: default;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clear {
+    animation: none;
+  }
+}
