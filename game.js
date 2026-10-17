@@ -14,6 +14,7 @@
   const sideShift = document.getElementById("side-shift");
   const boardCol = document.getElementById("board-col");
   const mobileControls = document.getElementById("mobile-controls");
+  const timerEl = document.getElementById("timer");
 
   let img = null;
   let imageReady = false;
@@ -26,6 +27,9 @@
   let cssW = 640;
   let cssH = 480;
   let lastSize = "";
+  let timerStart = 0;
+  let timerId = 0;
+  let timerRunning = false;
 
   function mod(n, m) {
     return ((n % m) + m) % m;
@@ -51,6 +55,45 @@
 
   function showBanner() {
     clearEl.hidden = false;
+  }
+
+  function formatTime(ms) {
+    const totalTenths = Math.floor(Math.max(0, ms) / 100);
+    const tenths = totalTenths % 10;
+    const totalSeconds = Math.floor(totalTenths / 10);
+    const seconds = totalSeconds % 60;
+    const minutes = Math.floor(totalSeconds / 60);
+    return `${minutes}:${String(seconds).padStart(2, "0")}.${tenths}`;
+  }
+
+  function renderTimer(ms) {
+    timerEl.textContent = formatTime(ms);
+  }
+
+  function resetTimer() {
+    clearInterval(timerId);
+    timerId = 0;
+    timerRunning = false;
+    timerEl.classList.remove("is-stopped");
+    renderTimer(0);
+  }
+
+  function startTimer() {
+    resetTimer();
+    timerStart = performance.now();
+    timerRunning = true;
+    timerId = setInterval(() => {
+      renderTimer(performance.now() - timerStart);
+    }, 100);
+  }
+
+  function stopTimer() {
+    if (!timerRunning) return;
+    timerRunning = false;
+    clearInterval(timerId);
+    timerId = 0;
+    renderTimer(performance.now() - timerStart);
+    timerEl.classList.add("is-stopped");
   }
 
   function cancelAnim() {
@@ -286,6 +329,7 @@
   }
 
   function beginClear() {
+    stopTimer();
     solved = true;
     animating = true;
     syncButtons();
@@ -426,6 +470,7 @@
     cancelAnim();
     hideBanner();
     scramble();
+    startTimer();
     syncButtons();
     updateSelection();
     draw();
@@ -438,6 +483,7 @@
     solved = false;
     imageReady = false;
     hideBanner();
+    resetTimer();
     syncButtons();
     restartBtn.disabled = true;
     showMessage("読み込み中");
@@ -450,6 +496,7 @@
       hideMessage();
       restartBtn.disabled = false;
       scramble();
+      startTimer();
       syncButtons();
       updateSelection();
       lastSize = "";

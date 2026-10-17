@@ -48,16 +48,23 @@ h1 {
   letter-spacing: 0.12em;
 }
 
-.lede,
-.hint {
+.lede {
   margin: 8px 0 0;
   color: var(--muted);
   line-height: 1.6;
   text-wrap: balance;
 }
 
-.hint {
-  font-size: 0.92rem;
+.timer {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.timer.is-stopped {
+  color: var(--accent);
 }
 
 .mobile-controls {

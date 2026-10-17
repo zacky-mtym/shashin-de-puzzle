@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>写真deパズル</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <div class="app">
     <header>
+      <p class="timer" id="timer">0:00.0</p>
       <h1>写真deパズル</h1>
       <p class="lede">帯を左右にずらして、上下に入れ替え、1枚の写真にそろえる。</p>
       <div class="toolbar">
@@ -46,10 +47,8 @@
       <button type="button" data-act="left" aria-label="選択中の帯を左へずらす">←</button>
       <button type="button" data-act="right" aria-label="選択中の帯を右へずらす">→</button>
     </div>
-
-    <p class="hint">帯をクリックして選ぶと、矢印キーでも動く。</p>
   </div>
   <script src="photos.js"></script>
-  <script src="game.js"></script>
+  <script src="game.js?v=2"></script>
 </body>
 </html>
